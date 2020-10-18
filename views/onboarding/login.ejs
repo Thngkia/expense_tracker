@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="columns is-vcentered">
+                    <div class="column is-5">
+                        <figure class="image is-4by3">
+                            <img src="https://picsum.photos/800/600/?random" alt="Description">
+                        </figure>
+                    </div>
+                    <div class="column is-6 is-offset-1">
+                      <h1 class="title is-2">
+                          Login
+                      </h1>
+                      <form action="/users/login" method="POST">
+                        
+                            <div class="field">
+                              <p class="control has-icons-left has-icons-right">
+                                <input class="input" type="email" placeholder="Email" name="email" id="email">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-envelope"></i>
+                                </span>
+                                <span class="icon is-small is-right">
+                                  <i class="fas fa-check"></i>
+                                </span>
+                              </p>
+                            </div>
+
+                            <div class="field">
+                              <p class="control has-icons-left">
+                                <input class="input" type="password" placeholder="Password" name="password" id="password">
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-lock"></i>
+                                </span>
+                              </p>
+                            </div>
+                            
+                            <div class="field is-grouped">
+                              <div class="control">
+                                <button class="button is-link" type="submit">Submit</button>
+                              </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<%- include('../partials/footer') %>
+

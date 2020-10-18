@@ -1,0 +1,58 @@
+<%- include('../partials/header') %>
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="columns is-vcentered">
+                    <div class="column is-5">
+                        <figure class="image is-4by3">
+                            <img src="https://picsum.photos/800/600/?random" alt="Description">
+                        </figure>
+                    </div>
+
+                    <div class="column is-4 is-offset-2">
+                        <form action="/users/register" method="POST">
+                            
+                            <div class="field">
+                                <label class="label has-text-left">Username</label>
+                                <div class="control has-icons-left">
+                                  <input class="input" type="text" name="username" id="username">
+                                  <span class="icon is-small is-left">
+                                    <i class="fas fa-user"></i>
+                                  </span>
+                                </div>
+                              </div>
+                              
+                              <div class="field">
+                                <label class="label has-text-left">Email</label>
+                                <div class="control has-icons-left">
+                                  <input class="input" name="email" type="text" id="email">
+                                  <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                  </span>
+                                </div>
+                              </div>
+                              
+                              <div class="field">
+                                <label class="label has-text-left">Password</label>
+                                <div class="control has-icons-left has-icons-right">
+                                  <input class="input" type="password" name="password" id="password">
+                                  <span class="icon is-small is-left">
+                                    <i class="fas fa-lock"></i>
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div class="field is-grouped">
+                                <div class="control">
+                                  <button class="button is-link" type="submit">Submit</button>
+                                </div>
+                              </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<%- include('../partials/footer') %>
+
