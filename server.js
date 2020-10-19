@@ -37,8 +37,8 @@ app.get('/home', mainController.showLandingPage)
 app.get('/login', mainController.showLoginPage)
 app.get('/register', mainController.showRegistrationPage)
 
-app.post('/users/register', usersController.register)
-app.post('/users/login', usersController.login)
+app.post('/register', usersController.register)
+app.post('/login', usersController.login)
 
 /**
  * User dashboard routes

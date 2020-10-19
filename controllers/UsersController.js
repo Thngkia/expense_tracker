@@ -48,7 +48,6 @@ const controllers = {
             })
     },
     login: (req, res) => {
-        console.log(req.body)
         UserModel.findOne({
             email: req.body.email
         })
@@ -83,10 +82,23 @@ const controllers = {
             })
     },
     showDashboard: (req, res) => {
-
-        res.render('users/dashboard', {
-            pageTitle: 'User Dashboard'
+        UserModel.findOne({
+            email: req.session.user.email
         })
+            .then(result => {
+                if (!result) {
+                    res.redirect('/login')
+                    return
+                }
+                res.render('users/dashboard', {
+                    pageTitle: 'User Dashboard',
+                    username: result.username
+                })
+            }) 
+            .catch(err => {
+                console.log(err)
+                res.redirect('/login')
+            })
     },
 
     logout: (req, res) => {

@@ -30,7 +30,8 @@ const userSchema = new mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now
-    }
+    },
+    entry: [entry]
 })
 
 const UserModel = mongoose.model('User', userSchema)
