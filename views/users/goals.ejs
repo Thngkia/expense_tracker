@@ -1,0 +1,48 @@
+<%- include('../partials/header') %>
+
+    <!-- END NAV -->
+    <div class="container">
+        <div class="columns">
+            
+            <%- include('../partials/sidenav') %>
+
+            <div class="column is-10">
+
+            <!-- top notifications boxes -->
+
+                <div class="columns is-multiline">
+                    goals
+                    <div class="column">
+                      <div class="box notification is-danger">
+                        <div class="heading">Total amount spent this week</div>
+                        <div class="title">56,950</div>
+                        <div class="heading">Total amount spent this week</div>
+                        <div class="title">56,950</div>
+                      </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="columns">
+                    <div class="column is-6">
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+                    <div class="column is-6">
+                        <canvas id="incomeChart"></canvas>
+                    </div>
+                    <!-- <canvas id="expenseChart"></canvas>
+                    <canvas id="incomeChart"></canvas> -->
+                    <canvas id="assetChart"></canvas>
+                    <script><%- include('script.js') %></script>
+                </div>  
+               
+                
+            </div>
+        </div>
+    </div>
+
+    <script async type="text/javascript" src="../js/bulma.js"></script>    
+
+</body>
+
+</html>

@@ -82,6 +82,7 @@ const controllers = {
             })
     },
     showDashboard: (req, res) => {
+        console.log(req.session.user)
         UserModel.findOne({
             email: req.session.user.email
         })
@@ -90,7 +91,7 @@ const controllers = {
                     res.redirect('/login')
                     return
                 }
-                res.render('users/dashboard', {
+                res.render('users/overview', {
                     pageTitle: 'User Dashboard',
                     username: result.username
                 })
@@ -99,6 +100,15 @@ const controllers = {
                 console.log(err)
                 res.redirect('/login')
             })
+    },
+    showDashboardIncome: (req,res) => {
+        res.render('users/income')
+    },
+    showDashboardExpenses: (req,res) => {
+        res.render('users/expenses')
+    },
+    showDashboardGoals: (req,res) => {
+        res.render('users/goals')
     },
 
     logout: (req, res) => {

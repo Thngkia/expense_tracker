@@ -44,6 +44,9 @@ app.post('/login', usersController.login)
  * User dashboard routes
  */
 app.get('/dashboard', usersController.showDashboard)
+app.get('/dashboard/income', usersController.showDashboardIncome)
+app.get('/dashboard/expenses', usersController.showDashboardExpenses)
+app.get('/dashboard/goals', usersController.showDashboardGoals)
 
 
 
