@@ -16,14 +16,25 @@
                             Personal finance becomes easy to manage
                         </h2>
                         <br>
+                        <% if (user === null) { %>
                         <p class="has-text-centered">
                             <a class="button is-medium is-info is-outlined" href="/register">
                                 Sign up
                             </a>
-                            <a class="button is-medium is-primary is-outlined" href="/Login">
+                            <a class="button is-medium is-primary is-outlined" href="/login">
                                 Login
                             </a>
                         </p>
+                        <% } else { %>
+                        <p class="has-text-centered">
+                            <form action="/logout" method="POST">
+                                <button class="button is-medium is-info is-outlined" type="submit">Logout</button>
+                                <a class="button is-medium is-primary is-outlined" href="/dashboard">
+                                    Dashboard
+                                </a>
+                            </form>
+                        </p>
+                        <% } %>
                     </div>
                 </div>
             </div>
