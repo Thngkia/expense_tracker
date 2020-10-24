@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
-const entry = require('./entry')
+// const { schema } = require('./entry')
+// const entry = require('./entry')
+
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -31,7 +33,30 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: Date.now
     },
-    entry: [entry]
+    entry: [{
+        type: {
+            required: true,
+            type: String
+        },
+        amount: {
+            required: true,
+            type: Number,
+        },
+        category:{
+            required: true,
+            type: String,
+        },
+        created_at: {
+            type: Date,
+            required: true,
+            default: Date.now
+        },
+        updated_at: {
+            type: Date,
+            required: true,
+            default: Date.now
+        }
+    }]
 })
 
 const UserModel = mongoose.model('User', userSchema)

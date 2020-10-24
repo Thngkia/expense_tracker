@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const entry = new mongoose.Schema({
+const entrySchema = new mongoose.Schema({
     type: {
         required: true,
         type: String
@@ -24,5 +24,6 @@ const entry = new mongoose.Schema({
         default: Date.now
     }
 })
+const EntryModel = mongoose.model('Entry', entrySchema)
 
-module.exports = entry
+module.exports = EntryModel

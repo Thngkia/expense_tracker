@@ -11,7 +11,6 @@
             <!-- top notifications boxes -->
 
                 <div class="columns is-multiline">
-                    goals
                     <div class="column">
                       <div class="box notification is-danger">
                         <div class="heading">Total amount spent this week</div>
@@ -34,15 +33,12 @@
                     <canvas id="incomeChart"></canvas> -->
                     <canvas id="assetChart"></canvas>
                     <script><%- include('script.js') %></script>
-                </div>  
-               
+                </div>
+                
+                <%- include('../partials/newentrymodal') %>
                 
             </div>
         </div>
     </div>
 
-    <script async type="text/javascript" src="../js/bulma.js"></script>    
-
-</body>
-
-</html>
+<%- include('../partials/footer') %>

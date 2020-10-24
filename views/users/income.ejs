@@ -3,45 +3,37 @@
     <!-- END NAV -->
     <div class="container">
         <div class="columns">
-            
+            <!-- left column for sidenav, right is for main content -->
             <%- include('../partials/sidenav') %>
-
             <div class="column is-10">
 
             <!-- top notifications boxes -->
-                income
+              <section>
                 <div class="columns is-multiline">
-                    <div class="column">
-                      <div class="box notification is-primary">
-                        <div class="heading">Total amount spent this week</div>
-                        <div class="title">56,950</div>
-                        <div class="heading">Total amount spent this week</div>
-                        <div class="title">56,950</div>
-                      </div>
+                  <div class="column">
+                    <div class="box notification is-primary">
+                      <div class="heading">Total amount spent this week</div>
+                      <div class="title">56,950</div>
+                      <div class="heading">Total amount spent this week</div>
+                      <div class="title">56,950</div>
                     </div>
+                  </div>
                 </div>
-
-                <!-- Charts -->
+              </section>
+              
+              <section>
                 <div class="columns">
-                    <div class="column is-6">
-                        <canvas id="expenseChart"></canvas>
-                    </div>
-                    <div class="column is-6">
-                        <canvas id="incomeChart"></canvas>
-                    </div>
-                    <!-- <canvas id="expenseChart"></canvas>
-                    <canvas id="incomeChart"></canvas> -->
-                    <canvas id="assetChart"></canvas>
-                    <script><%- include('script.js') %></script>
-                </div>  
-               
-                
+                  <div class="column is-6">
+                    <canvas id="expenseChart"></canvas>
+                  </div>
+                  <div class="column is-6">
+                    <canvas id="incomeChart"></canvas>
+                  </div>
+                </div>
+              </section>
+              <%- include('../partials/newentrymodal') %>
             </div>
         </div>
     </div>
 
-    <script async type="text/javascript" src="../js/bulma.js"></script>    
-
-</body>
-
-</html>
+<%- include('../partials/footer') %>

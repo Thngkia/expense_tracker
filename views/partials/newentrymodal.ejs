@@ -3,14 +3,53 @@
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Modal title</p>
-        <button class="delete" aria-label="close"></button>
+        <button class="delete close-modal" aria-label="close" id=""></button>
       </header>
-      <section class="modal-card-body">
-        <!-- Content ... -->
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button is-success">Save changes</button>
-        <button class="button">Cancel</button>
-      </footer>
+      
+      <form action="/users/newentry" method="POST">
+        <section class="modal-card-body"> 
+          <div class="control">
+            <label class="radio">
+              <input type="radio" name="type" value="expense">
+              Expense
+            </label>
+            <label class="radio">
+              <input type="radio" name="type" value="income">
+              Income
+            </label>
+          </div>
+          
+          <span></span>
+          
+          <div class="field">
+            <label class="label">Amount</label>
+            <div class="control">
+              <input class="input" type="text" name="amount">
+            </div>
+          </div>
+          
+          <span></span>
+
+          <div class="field">
+            <label class="label">Category (e.g. shopping, transport, lunch)</label>
+            <div class="control">
+              <input class="input" type="text" name="category">
+            </div>
+          </div>
+
+          <footer class="modal-card-foot">
+            <button class="button is-success" type="submit">Submit</button>
+            <button class="button close-modal">Cancel</button>
+          </footer>
+        </section>
+      </form>
+     
+    <!-- <script>
+      document.querySelector('.close-modal')
+        .addEventListener('click', () => {
+          document.querySelector('#new-entry-modal').classList.remove("is-active")
+      })
+    </script> -->
+      
     </div>
   </div>
