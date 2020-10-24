@@ -6,16 +6,14 @@ const session = require('express-session')
 const mainController = require('./controllers/MainController')
 const usersController = require('./controllers/UsersController')
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
-const mongoURI = 'mongodb://localhost:27017/expense_tracker'
-const db = mongoose.connection
-
+const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}`
 mongoose.set('useFindAndModify', false)
-mongoose.connect( mongoURI, { useNewUrlParser: true, useUnifiedTopology: true } )
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
+app.use(methodOverride('_method'))
 app.use(express.urlencoded({
   extended: true
 }))
@@ -27,6 +25,8 @@ app.use(session({
   cookie: { secure: false, maxAge: 3600000 } 
 }))
 app.use(setUserVarMiddleWare)
+
+
 
 /**
  * User onboarding routes
@@ -53,10 +53,23 @@ app.post('/users/newentry', usersController.newEntry)
 app.post('/logout', authenticatedOnlyMiddleware, usersController.logout)
 
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-  })
+// app.listen(port, () => {
+//     console.log(`Example app listening at http://localhost:${port}`)
+//   })
+// cannot make 2 listen 
 
+mongoose.connect( mongoURI, { useNewUrlParser: true, useUnifiedTopology: true } )
+  .then(response => {
+    // DB connected successfully
+    console.log('DB connection successful')
+
+    app.listen(process.env.PORT || port, () => {
+      console.log(`Expense tracker listening on port: ${port}`)
+    })
+  })
+  .catch(err => {
+    console.log(err)
+  })
 
 function guestOnlyMiddleware(req, res, next) {
   // check if user if logged in,
