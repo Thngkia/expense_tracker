@@ -1,0 +1,32 @@
+<div id="update-income-modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Income</p>
+        <button class="delete close-modal" aria-label="close" id=""></button>
+      </header>
+      
+      <form action="/users/updateincome" method="POST">
+        <section class="modal-card-body">
+          <header class="modal-card-head">
+            Update your income
+          </header>
+          <section class="modal-card-body">
+            <div class="field">
+              <label class="label">Income</label>
+              <div class="control">
+                <input class="input" type="text" name="income" value="<%= user.income %>">
+              </div>
+            </div>
+          </section>
+          
+          <footer class="modal-card-foot">
+            <button class="button is-success" type="submit">Submit</button>
+            <button class="button close-modal">Cancel</button>
+          </footer>
+        </section>
+      </form>
+      
+    
+    </div>
+  </div>

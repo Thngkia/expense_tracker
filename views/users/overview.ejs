@@ -10,9 +10,20 @@
               <section>
                 <div class="columns is-full">
                   <div class="column">
+                    
                     <div class="box notification is-light">
-                      <div class="heading">Total Income this month</div>
-                      <div class="title" id="incomeValue"><%= income %></div>
+                      <div class="level">
+                        <div class="level-left">
+                          <div>
+                            <div class="heading">Total Income this month</div>
+                            <div class="title" id="incomeValue"><%= income %></div>
+                          </div>
+                        </div>
+                        <div class="level-right">
+                          <a class="button is-danger" id="update-income">Edit</a>
+                        </div>
+                      </div>
+                      
                     </div>
                   </div>
                 </div>
@@ -44,10 +55,36 @@
               
               <section>
                 <div class="columns">
-                  <canvas id="overallChart"></canvas>
+                  <div class="column is-8">
+                    
+                    <table class="table is-fullwidth">
+                      <thead>
+                          <tr>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <% let entries = user.entry %> 
+                          <% entries.forEach(item => {  %>
+                          <tr>
+                              <td><%= item.category %> </td>
+                              <td><%= item.type %> </td>
+                              <td><%= item.amount %> </td>
+                          </tr>
+                          <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="column is-4">
+                    <canvas id="overallChart"></canvas>
+                  </div>
+                  
                 </div>
               </section>
               <%- include('../partials/newentrymodal') %>
+              <%- include('../partials/updateincomemodal') %>
             </div>
         </div>
     </div>

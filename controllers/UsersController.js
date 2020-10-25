@@ -2,6 +2,10 @@ const uuid = require('uuid')
 const SHA256 = require("crypto-js/sha256")
 const UserModel = require('../models/users')
 const EntryModel = require('../models/entry')
+let totalNeeds = 0
+let totalWants = 0
+let totalSavings = 0
+let userData = null
 
 const controllers = {
     
@@ -92,10 +96,11 @@ const controllers = {
                     res.redirect('/login')
                     return
                 }
-                let totalNeeds = calculateNeeds(result.entry)
-                let totalWants = calculateWants(result.entry)
-                let totalSavings = result.income - totalNeeds - totalWants
 
+                totalNeeds = calculateNeeds(result.entry)
+                totalWants = calculateWants(result.entry)
+                totalSavings = result.income - totalNeeds - totalWants
+                userData = result
                 console.log(totalNeeds, totalWants, totalSavings, result.entry)
                 res.render('users/overview', {
                     pageTitle: 'User Dashboard',
@@ -103,7 +108,8 @@ const controllers = {
                     income: result.income,
                     needs: totalNeeds,
                     wants: totalWants,
-                    savings: totalSavings
+                    savings: totalSavings,
+                    user: userData
                 })
             }) 
             .catch(err => {
@@ -113,19 +119,37 @@ const controllers = {
     },
     showDashboardIncome: (req,res) => {
         res.render('users/income', {
-            pageTitle: "Income"
+            pageTitle: "Income",
+            income: userData.income
         })
     },
 
     showDashboardExpenses: (req,res) => {
         res.render('users/expenses', {
-            pageTitle: "Expense"
+            pageTitle: "Expense",
+            user: userData
         })
     },
 
     showDashboardGoals: (req,res) => {
         res.render('users/goals', {
             pageTitle: "Goals"
+        })
+    },
+
+    showDashboardNeeds: (req,res) => {
+        res.render('users/needs', {
+            pageTitle: "needs",
+            needs: totalNeeds,
+            user: userData
+        })
+    },
+
+    showDashboardWants: (req,res) => {
+        res.render('users/wants', {
+            pageTitle: "wants",
+            wants: totalWants,
+            user: userData
         })
     },
 
@@ -157,21 +181,41 @@ const controllers = {
                         }
                     }
                 )
-                    .then(updateResult => {
-                         // result.entry.push({ entryType: 'expense' })
-                        console.log("updated")
+                .then(updateResult => {
+                    console.log("updated")
+                    res.redirect('/dashboard')
+                })
+                .catch(err => {
+                    console.log(err)
+                    res.redirect('/dashboard')
+                })
+            })
+            .catch(err => {
+                console.log(err)
+                res.redirect('/dashboard')
+            })
+    },
 
-                        res.redirect('/dashboard')
-                        // res.render('users/overview', {
-                        //     pageTitle: 'User Dashboard',
-                        //     username: result.username
-                        // })
-                    })
-                    .catch(err => {
-                        console.log(err)
-                        res.redirect('/dashboard')
-                    })
-            }) 
+    updateIncome: (req,res) => {
+        console.log(req.body)
+        UserModel.findOneAndUpdate(
+            {
+                email: req.session.user.email
+            },
+            {
+                income: req.body.income
+            }
+            )
+            .then(updateResult => {
+                // result.entry.push({ entryType: 'expense' })
+               console.log("updated income")
+
+               res.redirect('/dashboard')
+               // res.render('users/overview', {
+               //     pageTitle: 'User Dashboard',
+               //     username: result.username
+               // })
+            })
             .catch(err => {
                 console.log(err)
                 res.redirect('/dashboard')
@@ -214,6 +258,5 @@ let calculateNeeds = (entry) => {
     })
     return total
 }
-// calculate SAVINGS
 
 module.exports = controllers

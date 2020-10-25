@@ -18,7 +18,7 @@ const controllers = {
 
     showRegistrationPage: (req, res) => {
         res.render('onboarding/register',{
-            pageTitle: "Sign up"
+            pageTitle: "Sign up "
         })
     }
 }

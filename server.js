@@ -44,9 +44,12 @@ app.get('/dashboard', authenticatedOnlyMiddleware, usersController.showDashboard
 app.get('/dashboard/income', authenticatedOnlyMiddleware, usersController.showDashboardIncome)
 app.get('/dashboard/expenses', authenticatedOnlyMiddleware, usersController.showDashboardExpenses)
 app.get('/dashboard/goals', authenticatedOnlyMiddleware, usersController.showDashboardGoals)
+app.get('/dashboard/needs', authenticatedOnlyMiddleware, usersController.showDashboardNeeds)
+app.get('/dashboard/wants', authenticatedOnlyMiddleware, usersController.showDashboardWants)
 app.get('/test_layout', usersController.showTestLayout)
 
 app.post('/users/newentry', usersController.newEntry)
+app.post('/users/updateincome', usersController.updateIncome)
 
 app.post('/logout', authenticatedOnlyMiddleware, usersController.logout)
 

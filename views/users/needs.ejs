@@ -1,0 +1,65 @@
+<%- include('../partials/header') %>
+
+    <!-- END NAV -->
+    <div class="container">
+        <div class="columns">
+            <!-- left column for sidenav, right is for main content -->
+            <%- include('../partials/sidenav') %>
+            <div class="column is-10">
+
+            <!-- top notifications boxes -->
+              <section>
+                <div class="columns is-multiline">
+                  <div class="column">
+                    <div class="box notification is-primary">
+                      <div class="heading">Total amount spent this week</div>
+                      <div class="title"><%= needs %></div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              
+              <section>
+                  <div class="column">
+                    <table class="table is-fullwidth">
+                        <thead>
+                            <tr>
+                              <th>Category</th>
+                              <th>Type</th>
+                              <th>Amount</th>
+                              <th>Date</th>
+                              <th>Tags</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Total Amount</th>
+                                <th></th>
+                                <th>$ <%= needs %> </th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <% let entries = user.entry %> 
+                            <% entries.forEach(item => { if (item.type == "needs") { %>
+                            <tr>
+                                <td><%= item.category %> </td>
+                                <td><%= item.type %> </td>
+                                <td>$ <%= item.amount %> </td>
+                                <td><%= item.created_at %> </td>
+                                <td></td>
+                            </tr>
+                            <% }}) %>
+                        </tbody>
+                    </table>
+                  </div>
+                
+              </section>
+              
+              <%- include('../partials/newentrymodal') %>
+            </div>
+        </div>
+    </div>
+
+<%- include('../partials/footer') %>
