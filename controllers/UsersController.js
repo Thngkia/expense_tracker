@@ -33,6 +33,7 @@ const controllers = {
                 UserModel.create({
                     username: req.body.username,
                     email: req.body.email,
+                    income: req.body.income,
                     pwsalt: salt,
                     hash: hash
                 })
@@ -91,9 +92,18 @@ const controllers = {
                     res.redirect('/login')
                     return
                 }
+                let totalNeeds = calculateNeeds(result.entry)
+                let totalWants = calculateWants(result.entry)
+                let totalSavings = result.income - totalNeeds - totalWants
+
+                console.log(totalNeeds, totalWants, totalSavings, result.entry)
                 res.render('users/overview', {
                     pageTitle: 'User Dashboard',
-                    username: result.username
+                    username: result.username,
+                    income: result.income,
+                    needs: totalNeeds,
+                    wants: totalWants,
+                    savings: totalSavings
                 })
             }) 
             .catch(err => {
@@ -102,15 +112,21 @@ const controllers = {
             })
     },
     showDashboardIncome: (req,res) => {
-        res.render('users/income')
+        res.render('users/income', {
+            pageTitle: "Income"
+        })
     },
 
     showDashboardExpenses: (req,res) => {
-        res.render('users/expenses')
+        res.render('users/expenses', {
+            pageTitle: "Expense"
+        })
     },
 
     showDashboardGoals: (req,res) => {
-        res.render('users/goals')
+        res.render('users/goals', {
+            pageTitle: "Goals"
+        })
     },
 
     newEntry: (req,res) => {
@@ -170,5 +186,34 @@ const controllers = {
         res.render("users/test_layout")
     }
 }
+
+// calculate EXPENSE
+let calculateWants = (entry) => {
+    console.log(entry.length)
+    if (entry.length == 0) {
+        return 0
+    }
+    let total = 0 
+    entry.forEach(item => {
+        if (item.type == "wants") {
+            total += item.amount
+        }
+    })
+    return total
+}
+// calculate INCOME
+let calculateNeeds = (entry) => {
+    if (entry.length == 0) {
+        return 0
+    }
+    let total = 0
+    entry.forEach(item => {
+        if (item.type == "needs") {
+            total += item.amount
+        }
+    })
+    return total
+}
+// calculate SAVINGS
 
 module.exports = controllers

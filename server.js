@@ -26,8 +26,6 @@ app.use(session({
 }))
 app.use(setUserVarMiddleWare)
 
-
-
 /**
  * User onboarding routes
  */
@@ -52,11 +50,6 @@ app.post('/users/newentry', usersController.newEntry)
 
 app.post('/logout', authenticatedOnlyMiddleware, usersController.logout)
 
-
-// app.listen(port, () => {
-//     console.log(`Example app listening at http://localhost:${port}`)
-//   })
-// cannot make 2 listen 
 
 mongoose.connect( mongoURI, { useNewUrlParser: true, useUnifiedTopology: true } )
   .then(response => {

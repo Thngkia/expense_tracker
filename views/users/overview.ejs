@@ -6,32 +6,37 @@
             <!-- left column for sidenav, right is for main content -->
             <%- include('../partials/sidenav') %>
             <div class="column is-10">
-
             <!-- top notifications boxes -->
               <section>
+                <div class="columns is-full">
+                  <div class="column">
+                    <div class="box notification is-light">
+                      <div class="heading">Total Income this month</div>
+                      <div class="title" id="incomeValue"><%= income %></div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="columns is-multiline">
                   <div class="column">
                     <div class="box notification is-primary">
-                      <div class="heading">Expense</div>
-                      <div class="title">56,950</div>
-                      <div class="heading">Total amount spent this week</div>
-                      <div class="title">56,950</div>
+                      <div class="heading">Total spent on Needs</div>
+                      <div class="title" id="needsValue"><%= needs %></div>
                     </div>
                   </div>
+
                   <div class="column">
                     <div class="box notification is-info">
-                      <div class="heading">Total amount spent this week</div>
-                      <div class="title">56,950</div>
-                      <div class="heading">Total amount spent this week</div>
-                      <div class="title">56,950</div>
+                      <div class="heading">Total spent on wants</div>
+                      <div class="title" id="wantsValue"><%= wants %></div>
+                      
                     </div>
                   </div>
                   <div class="column">
                     <div class="box notification is-danger">
-                      <div class="heading">Total amount spent this week</div>
-                      <div class="title">56,950</div>
-                      <div class="heading">Total amount spent this week</div>
-                      <div class="title">56,950</div>
+                      <div class="heading">Total in savings</div>
+                      <div class="title" id="savingsValue"><%= savings %></div>
+                     
                     </div>
                   </div>
                 </div>
@@ -39,12 +44,7 @@
               
               <section>
                 <div class="columns">
-                  <div class="column is-6">
-                    <canvas id="expenseChart"></canvas>
-                  </div>
-                  <div class="column is-6">
-                    <canvas id="incomeChart"></canvas>
-                  </div>
+                  <canvas id="overallChart"></canvas>
                 </div>
               </section>
               <%- include('../partials/newentrymodal') %>

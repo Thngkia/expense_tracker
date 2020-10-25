@@ -1,7 +1,4 @@
 const mongoose = require('mongoose')
-// const { schema } = require('./entry')
-// const entry = require('./entry')
-
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -18,6 +15,9 @@ const userSchema = new mongoose.Schema({
     pwsalt: {
         type: String,
         required: true
+    },
+    income: {
+        type: String
     },
     hash: {
         type: String,
