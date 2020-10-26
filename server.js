@@ -50,6 +50,8 @@ app.get('/test_layout', usersController.showTestLayout)
 
 app.post('/users/newentry', usersController.newEntry)
 app.post('/users/updateincome', usersController.updateIncome)
+app.get('/users/updateentry/:id', usersController.showUpdateEntry)
+app.post('/users/updateentry/:id', usersController.postUpdateEntry)
 
 app.post('/logout', authenticatedOnlyMiddleware, usersController.logout)
 

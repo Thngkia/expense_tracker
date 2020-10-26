@@ -40,11 +40,14 @@ const userSchema = new mongoose.Schema({
         },
         amount: {
             required: true,
-            type: Number,
+            type: Number
         },
         category:{
             required: true,
-            type: String,
+            type: String
+        },
+        tags: {
+            type: Array
         },
         created_at: {
             type: Date,

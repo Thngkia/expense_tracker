@@ -15,6 +15,13 @@ document.querySelector('#update-income').addEventListener('click', () => {
 document.querySelector('.close-modal').addEventListener('click', () => {
     document.querySelector('#update-income-modal').classList.remove("is-active")
 })
+// // event listeners for update income button and modal
+// document.querySelector('#update-entry').addEventListener('click', () => {
+//     document.querySelector('#update-entry-modal').classList.add("is-active")
+// })
+// document.querySelector('.close-modal').addEventListener('click', () => {
+//     document.querySelector('#update-entry-modal').classList.remove("is-active")
+// })
 
 let needsValue = document.getElementById('needsValue').innerHTML
 let wantsValue = document.getElementById('wantsValue').innerHTML
@@ -63,10 +70,7 @@ var myincomeChart = new Chart(incomeChart, {
         ]
         
     }
-});
+})
 
 // let newEntryButton = document.querySelector('#new-entry-modal')
 // let closeModal = document.querySelector('.close-modal')
-
-
-

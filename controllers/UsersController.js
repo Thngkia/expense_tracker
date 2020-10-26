@@ -101,7 +101,7 @@ const controllers = {
                 totalWants = calculateWants(result.entry)
                 totalSavings = result.income - totalNeeds - totalWants
                 userData = result
-                console.log(totalNeeds, totalWants, totalSavings, result.entry)
+                // console.log(totalNeeds, totalWants, totalSavings, result.entry)
                 res.render('users/overview', {
                     pageTitle: 'User Dashboard',
                     username: result.username,
@@ -163,7 +163,8 @@ const controllers = {
                     res.redirect('/dashboard')
                     return
                 }
-                console.log(req.session.user)
+                let entryTags = req.body.tags.split(" ")
+            
                 UserModel.update(
                     {
                         // find the user using session email
@@ -176,7 +177,8 @@ const controllers = {
                             'entry': {
                                 type: req.body.type,
                                 amount: req.body.amount,
-                                category: req.body.category
+                                category: req.body.category,
+                                tags: entryTags
                             }
                         }
                     }
@@ -197,7 +199,6 @@ const controllers = {
     },
 
     updateIncome: (req,res) => {
-        console.log(req.body)
         UserModel.findOneAndUpdate(
             {
                 email: req.session.user.email
@@ -207,14 +208,45 @@ const controllers = {
             }
             )
             .then(updateResult => {
-                // result.entry.push({ entryType: 'expense' })
-               console.log("updated income")
-
-               res.redirect('/dashboard')
-               // res.render('users/overview', {
-               //     pageTitle: 'User Dashboard',
-               //     username: result.username
-               // })
+                res.redirect('/dashboard')
+            })
+            .catch(err => {
+                console.log(err)
+                res.redirect('/dashboard')
+            })
+    },
+    showUpdateEntry: (req,res) => {
+        UserModel.findOne(
+            {
+                email: req.session.user.email
+            }
+            )
+            .then(result => {
+                let entry = result.entry.filter(item => item.id == req.params.id)
+                console.log(entry)
+                res.render('users/updateentry', {
+                    entry: entry[0],
+                    pageTitle: "update entry"
+                })
+            })
+            .catch(err => {
+                console.log(err)
+                res.redirect('/dashboard')
+            })
+    },
+    postUpdateEntry: (req,res) => {
+        UserModel.findOne(
+            {
+                email: req.session.user.email
+            }
+            )
+            .then(result => {
+                let entry = result.entry.filter(item => item.id == req.params.id)
+                console.log(entry)
+                res.render('users/updateentry', {
+                    entry: entry[0],
+                    pageTitle: "update entry"
+                })
             })
             .catch(err => {
                 console.log(err)
@@ -233,7 +265,7 @@ const controllers = {
 
 // calculate EXPENSE
 let calculateWants = (entry) => {
-    console.log(entry.length)
+    // console.log(entry.length)
     if (entry.length == 0) {
         return 0
     }

@@ -1,0 +1,82 @@
+<%- include('../partials/header') %>
+
+<div id="update-entry-modal" class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Update Entry</p>
+        <button class="delete close-modal" aria-label="close" id=""></button>
+      </header>
+      
+      <form action="/users/updateentry" method="POST">
+        <section class="modal-card-body">
+          <header class="modal-card-head">
+            Enter your expense
+          </header>
+          <section class="modal-card-body">
+            <div class="field">
+              <label class="label">Category (e.g. shopping, transport, lunch)</label>
+              <div class="control">
+                <input class="input" type="text" name="category" value="<%= entry.category %>">
+              </div>
+            </div>
+  
+            <div class="field">
+              <label class="label">Is this a Need or Want?</label>
+              <div class="control">
+               <% if (entry.type == "needs") { %> 
+                  <label class="radio">
+                    <input type="radio" name="type" value="needs" checked="checked">
+                    Need
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="type" value="wants">
+                    Want
+                  </label> 
+                <% } else { %>
+                  <label class="radio">
+                    <input type="radio" name="type" value="needs">
+                    Need
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="type" value="wants" checked="checked">
+                    Want
+                  </label>
+                <% } %> 
+              </div>
+            </div>
+            
+            <div class="field">
+              <label class="label">Amount</label>
+              <div class="control has-icons-left">
+                <input class="input" type="text" name="amount" value="<%= entry.amount  %>">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-dollar-sign"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Tags (separate with space)</label>
+              <div class="control">
+                <input class="input" type="text" name="tags" value="<%= entry.tags.join(" ") %>">
+              </div>
+            </div>
+          </section>
+          
+          <footer class="modal-card-foot">
+            <button class="button is-success" type="submit">Submit</button>
+            <% if (entry.type == "needs") { %>
+              <a href="/dashboard/needs" class="button">cancel</a>
+            <% } else { %>
+              <a href="/dashboard/wants" class="button">cancel</a>
+            <% } %> 
+          </footer>
+        </section>
+      </form>
+      
+    
+    </div>
+  </div>
+
+  <%- include('../partials/footer') %>

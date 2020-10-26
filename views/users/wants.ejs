@@ -45,10 +45,10 @@
                             <% entries.forEach(item => { if (item.type == "wants") { %>
                             <tr>
                                 <td><%= item.category %> </td>
-                                <td><%= item.type %> </td>
+                                <td>Want </td>
                                 <td>$ <%= item.amount %> </td>
-                                <td><%= item.created_at %> </td>
-                                <td></td>
+                                <td><%= item.created_at.toDateString() %> </td>
+                                <td><%= item.tags.join(", ") %> </td>
                             </tr>
                             <% }}) %>
                         </tbody>
