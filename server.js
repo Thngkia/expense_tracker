@@ -52,6 +52,7 @@ app.post('/users/newentry', usersController.newEntry)
 app.post('/users/updateincome', usersController.updateIncome)
 app.get('/users/updateentry/:id', usersController.showUpdateEntry)
 app.post('/users/updateentry/:id', usersController.postUpdateEntry)
+app.post('/users/deleteentry/:id', usersController.postDeleteEntry)
 
 app.post('/logout', authenticatedOnlyMiddleware, usersController.logout)
 

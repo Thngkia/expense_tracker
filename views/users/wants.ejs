@@ -29,13 +29,17 @@
                               <th>Amount</th>
                               <th>Date</th>
                               <th>Tags</th>
+                              <th></th>
+                              <th></th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Total Amount</th>
                                 <th></th>
-                                <th><%= wants %> </th>
+                                <th>$ <%= wants %> </th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -45,10 +49,21 @@
                             <% entries.forEach(item => { if (item.type == "wants") { %>
                             <tr>
                                 <td><%= item.category %> </td>
-                                <td>Want </td>
+                                <td>Need </td>
                                 <td>$ <%= item.amount %> </td>
                                 <td><%= item.created_at.toDateString() %> </td>
                                 <td><%= item.tags.join(", ") %> </td>
+                                <td>
+                                  <!-- <form action="" method="GET">
+                                    <button type="submit" class="button is-info">Update</button>
+                                  </form> -->
+                                  <a class="button is-info" href="/users/updateentry/<%= item.id %>">Update</a>
+                                </td>
+                                <td>
+                                  <form action="/users/deleteentry/<%= item.id %>" method="POST">
+                                    <button type="submit" class="button is-danger">Delete</button>
+                                  </form>
+                                </td>
                             </tr>
                             <% }}) %>
                         </tbody>

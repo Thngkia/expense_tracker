@@ -235,18 +235,45 @@ const controllers = {
             })
     },
     postUpdateEntry: (req,res) => {
-        UserModel.findOne(
+        // console.log(req.body, req.params.id, req.session.user.email)
+        UserModel.updateOne(
             {
-                email: req.session.user.email
-            }
-            )
+                email: req.session.user.email, 
+                "entry._id": req.params.id
+            },
+            {   
+                $set: 
+                { 
+                    "entry.$.type" : req.body.type,
+                    "entry.$.amount" : req.body.amount, 
+                    "entry.$.category" : req.body.category, 
+                    "entry.$.tags" : req.body.tags,
+                    // "entry.$.updated_at": new Date() 
+                }
+            })  
             .then(result => {
-                let entry = result.entry.filter(item => item.id == req.params.id)
-                console.log(entry)
-                res.render('users/updateentry', {
-                    entry: entry[0],
-                    pageTitle: "update entry"
-                })
+                res.redirect('/dashboard')
+            })
+            .catch(err => {
+                res.redirect('/dashboard')
+            })
+    },
+    postDeleteEntry: (req, res) => {
+        UserModel.updateOne(
+            {
+                email: req.session.user.email,
+            },
+            {   
+                $pull: 
+                { 
+                    entry: {
+                        "_id":  req.params.id
+                    }
+                }
+            })  
+            .then(result => {
+                console.log(result)
+                res.redirect('/dashboard')
             })
             .catch(err => {
                 console.log(err)

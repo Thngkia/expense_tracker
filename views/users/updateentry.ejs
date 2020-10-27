@@ -8,7 +8,7 @@
         <button class="delete close-modal" aria-label="close" id=""></button>
       </header>
       
-      <form action="/users/updateentry" method="POST">
+      <form action="/users/updateentry/<%= entry.id %>" method="POST">
         <section class="modal-card-body">
           <header class="modal-card-head">
             Enter your expense
