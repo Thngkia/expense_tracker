@@ -76,9 +76,6 @@ const controllers = {
                 
                 // set session user 
                 req.session.user = result
-
-                //console.log(req.session)
-
                 res.redirect('/dashboard')
 
             })
@@ -101,7 +98,6 @@ const controllers = {
                 totalWants = calculateWants(result.entry)
                 totalSavings = result.income - totalNeeds - totalWants
                 userData = result
-                // console.log(totalNeeds, totalWants, totalSavings, result.entry)
                 res.render('users/overview', {
                     pageTitle: 'User Dashboard',
                     username: result.username,
@@ -117,19 +113,6 @@ const controllers = {
                 res.redirect('/login')
             })
     },
-    showDashboardIncome: (req,res) => {
-        res.render('users/income', {
-            pageTitle: "Income",
-            income: userData.income
-        })
-    },
-
-    showDashboardExpenses: (req,res) => {
-        res.render('users/expenses', {
-            pageTitle: "Expense",
-            user: userData
-        })
-    },
 
     showDashboardGoals: (req,res) => {
         res.render('users/goals', {
@@ -138,19 +121,41 @@ const controllers = {
     },
 
     showDashboardNeeds: (req,res) => {
-        res.render('users/needs', {
-            pageTitle: "needs",
-            needs: totalNeeds,
-            user: userData
+        UserModel.findOne({
+            email: req.session.user.email
         })
+            .then(result => {
+
+                totalNeeds = calculateNeeds(result.entry)
+                res.render('users/needs', {
+                    pageTitle: "needs",
+                    needs: totalNeeds,
+                    user: result
+                })
+            }) 
+            .catch(err => {
+                console.log(err)
+                res.redirect('/login')
+            })
     },
 
     showDashboardWants: (req,res) => {
-        res.render('users/wants', {
-            pageTitle: "wants",
-            wants: totalWants,
-            user: userData
+        UserModel.findOne({
+            email: req.session.user.email
         })
+            .then(result => {
+
+                totalWants = calculateWants(result.entry)
+                res.render('users/wants', {
+                    pageTitle: "wants",
+                    wants: totalWants,
+                    user: result
+                })
+            }) 
+            .catch(err => {
+                console.log(err)
+                res.redirect('/login')
+            })
     },
 
     newEntry: (req,res) => {
@@ -184,7 +189,6 @@ const controllers = {
                     }
                 )
                 .then(updateResult => {
-                    console.log("updated")
                     res.redirect('/dashboard')
                 })
                 .catch(err => {
@@ -223,7 +227,6 @@ const controllers = {
             )
             .then(result => {
                 let entry = result.entry.filter(item => item.id == req.params.id)
-                console.log(entry)
                 res.render('users/updateentry', {
                     entry: entry[0],
                     pageTitle: "update entry"
@@ -235,7 +238,6 @@ const controllers = {
             })
     },
     postUpdateEntry: (req,res) => {
-        // console.log(req.body, req.params.id, req.session.user.email)
         UserModel.updateOne(
             {
                 email: req.session.user.email, 
@@ -258,7 +260,7 @@ const controllers = {
                 res.redirect('/dashboard')
             })
     },
-    postDeleteEntry: (req, res) => {
+    postWantsDeleteEntry: (req, res) => {
         UserModel.updateOne(
             {
                 email: req.session.user.email,
@@ -272,15 +274,59 @@ const controllers = {
                 }
             })  
             .then(result => {
-                console.log(result)
-                res.redirect('/dashboard')
+                res.redirect('/dashboard/wants')
             })
             .catch(err => {
                 console.log(err)
                 res.redirect('/dashboard')
             })
     },
+    postNeedsDeleteEntry: (req, res) => {
+        UserModel.updateOne(
+            {
+                email: req.session.user.email,
+            },
+            {   
+                $pull: 
+                { 
+                    entry: {
+                        "_id":  req.params.id
+                    }
+                }
+            })  
+            .then(result => {
+                
+                res.redirect('/dashboard/needs')
+            })
+            .catch(err => {
+                console.log(err)
+                res.redirect('/dashboard')
+            })
+    },
+    sortedByDate: (req, res) => {
+        UserModel.findOne({
+            email: req.session.user.email,
+            "entry.type": "needs"
+        })
+            .sort({
+                "category": -1
+            })
 
+            .then(result => {
+                console.log(result)
+                totalNeeds = calculateNeeds(result.entry)
+                res.render('users/needs', {
+                    pageTitle: "needs",
+                    needs: totalNeeds,
+                    user: result
+                })
+            }) 
+            .catch(err => {
+                console.log(err)
+                res.redirect('/login')
+            })
+
+    },
     logout: (req, res) => {
         req.session.destroy()
         res.redirect('/login')
@@ -292,7 +338,6 @@ const controllers = {
 
 // calculate EXPENSE
 let calculateWants = (entry) => {
-    // console.log(entry.length)
     if (entry.length == 0) {
         return 0
     }
