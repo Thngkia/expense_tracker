@@ -1,9 +1,9 @@
 console.log("app.js loaded")
 
 
-document.querySelector('#filter-dropdown').addEventListener('click', () => {
-    document.querySelector('#filter-dropdown').classList.toggle("is-active")
-})
+// document.querySelector('#filter-dropdown').addEventListener('click', () => {
+//     document.querySelector('#filter-dropdown').classList.toggle("is-active")
+// })
 
 
 // event listeners for new entry button and modal
