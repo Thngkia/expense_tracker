@@ -3,7 +3,7 @@
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Income</p>
-        <button class="delete close-modal" aria-label="close" id=""></button>
+        <button class="delete close-income-modal" aria-label="close" id=""></button>
       </header>
       
       <form action="/users/updateincome" method="POST">
@@ -15,14 +15,14 @@
             <div class="field">
               <label class="label">Income</label>
               <div class="control">
-                <input class="input" type="text" name="income" value="<%= user.income %>">
+                <input class="input" type="text" name="income" value="<%= user.income %>" required>
               </div>
             </div>
           </section>
           
           <footer class="modal-card-foot">
             <button class="button is-success" type="submit">Submit</button>
-            <button class="button close-modal">Cancel</button>
+            <button class="button close-income-modal">Cancel</button>
           </footer>
         </section>
       </form>

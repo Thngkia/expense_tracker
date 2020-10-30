@@ -21,7 +21,7 @@
               
               <section>
                   <div class="column">
-                    <!-- <div class="dropdown" id="filter-dropdown">
+                    <div class="dropdown" id="filter-dropdown">
                       <div class="dropdown-trigger">
                         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
                           <span>Sort by</span>
@@ -32,18 +32,18 @@
                       </div>
                       <div class="dropdown-menu" id="dropdown-menu" role="menu">
                         <div class="dropdown-content">
-                          <a href="/users/sortedbyname" class="dropdown-item">
-                            Name
+                          <a href="/users/sortedbycategory/needs" class="dropdown-item">
+                            Category
                           </a>
-                          <a href="/users/sortedbyamount" class="dropdown-item">
+                          <a href="/users/sortedbyamount/needs" class="dropdown-item">
                             Amount
                           </a>
-                          <a href="/users/sortedbydate" class="dropdown-item">
+                          <a href="/users/sortedbydate/needs" class="dropdown-item">
                             Date
                           </a>
                         </div>
                       </div>
-                    </div>-->
+                    </div>
                     <table class="table is-fullwidth">
                         <thead>
                             <tr>
@@ -68,7 +68,6 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                            <% let entries = user.entry %> 
                             <% entries.forEach(item => { if (item.type == "needs") { %>
                             <tr>
                                 <td><%= item.category %> </td>
@@ -83,7 +82,7 @@
                                   <a class="button is-info" href="/users/updateentry/<%= item.id %>">Update</a>
                                 </td>
                                 <td>
-                                  <form action="/users/deleteentry/needs/<%= item.id %>" method="POST">
+                                  <form action="/users/deleteentry/<%= item.id %>" method="POST">
                                     <button type="submit" class="button is-danger">Delete</button>
                                   </form>
                                 </td>

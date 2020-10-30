@@ -41,7 +41,6 @@ app.post('/login', guestOnlyMiddleware, usersController.login)
  * User dashboard routes
  */
 app.get('/dashboard', authenticatedOnlyMiddleware, usersController.showDashboard)
-app.get('/dashboard/goals', authenticatedOnlyMiddleware, usersController.showDashboardGoals)
 app.get('/dashboard/needs', authenticatedOnlyMiddleware, usersController.showDashboardNeeds)
 app.get('/dashboard/wants', authenticatedOnlyMiddleware, usersController.showDashboardWants)
 app.get('/test_layout', usersController.showTestLayout)
@@ -50,9 +49,10 @@ app.post('/users/newentry', usersController.newEntry)
 app.post('/users/updateincome', usersController.updateIncome)
 app.get('/users/updateentry/:id', usersController.showUpdateEntry)
 app.post('/users/updateentry/:id', usersController.postUpdateEntry)
-app.post('/users/deleteentry/wants/:id', usersController.postWantsDeleteEntry)
-app.post('/users/deleteentry/needs/:id', usersController.postNeedsDeleteEntry)
-app.get('/users/sortedbydate', usersController.sortedByDate)
+app.post('/users/deleteentry/:id', usersController.postDeleteEntry)
+app.get('/users/sortedbydate/:type', usersController.sortedByDate)
+app.get('/users/sortedbycategory/:type', usersController.sortedByCategory)
+app.get('/users/sortedbyamount/:type', usersController.sortedByAmount)
 
 app.post('/logout', authenticatedOnlyMiddleware, usersController.logout)
 
