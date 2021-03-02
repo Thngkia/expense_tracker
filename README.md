@@ -9,8 +9,8 @@
 
 ### Description
 
-![sample image of site](https://github.com/Thngkia/SEIF3-Project3-Frontend/blob/main/public/screenshot2.png)
-![sample image of site](https://github.com/Thngkia/SEIF3-Project3-Frontend/blob/main/public/screenshot1.png)
+![sample image of site](https://github.com/Thngkia/expense_tracker/blob/master/public/screenshot2.png)
+![sample image of site](https://github.com/Thngkia/expense_tracker/blob/master/public/screenshot1.png)
 
 Click [here](https://cryptic-hollows-75629.herokuapp.com/home) for the app!
 
